@@ -21,6 +21,7 @@ export interface KmsOptions {
   region: string;
   keyIds: string[];
   credential?: AwsCredential;
+  endpoint?: string;
 }
 
 export interface AwsCredential {
@@ -49,7 +50,7 @@ export class KmsProvider implements Provider {
   ) {
     this.engine = new ProviderEngine();
     this.signers = kmsOptions.keyIds.map(
-      (keyId) => new KmsSigner(kmsOptions.region, keyId, kmsOptions.credential)
+      (keyId) => new KmsSigner(kmsOptions.region, keyId, kmsOptions.credential, kmsOptions.endpoint)
     );
     this.networkOrNetworkOptions = networkOrNetworkOptions;
     this.ethereum = new Ethereum(endpoint);

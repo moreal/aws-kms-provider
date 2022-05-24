@@ -17,11 +17,12 @@ export class KmsSigner implements Signer {
   public constructor(
     region: string,
     keyId: string,
-    credential?: AwsCredential
+    credential?: AwsCredential,
+    endpoint?: string
   ) {
     this.keyId = keyId;
 
-    this.client = new KMSClient({ region, credentials: credential });
+    this.client = new KMSClient({ region, credentials: credential, endpoint });
   }
 
   public async sign(digest: Buffer): Promise<Signature> {
